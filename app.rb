@@ -29,6 +29,16 @@ def authenticate!
   end
 end
 
+def create_meetup(name, location, description)
+  Meetup.create(
+    name: name,
+    location: location,
+    description: description
+    )
+end
+
+#====================================================================
+
 get '/' do
   @meetups = Meetup.all.order('name asc')
   erb :index
@@ -51,11 +61,24 @@ get '/sign_out' do
   redirect '/'
 end
 
-get '/example_protected_page' do
-  authenticate!
-end
+# get '/example_protected_page' do
+#   authenticate!
+# end
 
 get '/meetups/:id' do
   @meetup = Meetup.find(params[:id])
   erb :'meetups/show'
+end
+
+get '/create_meetup' do
+  authenticate!
+  erb :'create_meetup/show'
+end
+
+post '/create_meetup' do
+  @name = params[:name]
+  @location = params[:location]
+  @description = params[:description]
+  Meetup.create(name: @name, description: @description, location: @location)
+  redirect '/'
 end
