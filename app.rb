@@ -79,6 +79,7 @@ post '/create_meetup' do
   @name = params[:name]
   @location = params[:location]
   @description = params[:description]
-  Meetup.create(name: @name, description: @description, location: @location)
-  redirect '/'
+  @new_meetup = create_meetup(@name, @description, @location)
+  @id = @new_meetup[:id]
+  redirect "/meetups/#{@id}"
 end
