@@ -81,5 +81,6 @@ post '/create_meetup' do
   @description = params[:description]
   @new_meetup = create_meetup(@name, @description, @location)
   @id = @new_meetup[:id]
+  flash[:notice] = "Your event has been created!"
   redirect "/meetups/#{@id}"
 end
