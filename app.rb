@@ -67,6 +67,7 @@ end
 
 get '/meetups/:id' do
   @meetup = Meetup.find(params[:id])
+  @users = @meetup.users("username, avatar_url")
   erb :'meetups/show'
 end
 
