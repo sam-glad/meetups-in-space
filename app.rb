@@ -114,12 +114,12 @@ end
 
 post '/post_comment/:id' do
   @user_id = session[:user_id]
+  @username = current_user.username
   @meetup_id = params[:id]
   @meetup = Meetup.find(@meetup_id)
   @comment_title = params[:title]
   @comment_body = params[:body]
-  @comment = create_comment(@user_id, @meetup_id,
-    @comment_title, @comment_body)
+  create_comment(@user_id, @meetup_id, @comment_title, @comment_body)
   flash[:notice] = "Comment posted!"
   redirect "/meetups/#{@meetup_id}"
 end

@@ -27,7 +27,8 @@
 
   <% @comments.each do |comment| %>
     <h4><%= comment.title %></h4>
-    <p><%= comment.body %></p>
+    <p><%= comment.body %> by <%= User.find(comment.user_id).username %></p>
+    <br>
   <% end %>
 
   <br>
