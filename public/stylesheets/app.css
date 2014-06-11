@@ -10,6 +10,10 @@ a:visited {
   text-decoration: none;
 }
 
+input, textarea {
+  background-color: #000000;
+}
+
 .container {
   max-width: 1024px;
   margin: 0 auto;
