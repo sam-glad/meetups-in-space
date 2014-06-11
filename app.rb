@@ -80,6 +80,7 @@ post '/create_meetup' do
   @location = params[:location]
   @description = params[:description]
   @new_meetup = create_meetup(@name, @description, @location)
+  # TODO use ActiveRecord below?
   @id = @new_meetup[:id]
   flash[:notice] = "Your event has been created!"
   redirect "/meetups/#{@id}"
