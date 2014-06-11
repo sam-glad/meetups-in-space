@@ -98,9 +98,14 @@ post "/join_meetup/:id" do
   @user_id = session[:user_id]
   @meetup_id = params[:id]
   @meetup = Meetup.find(@meetup_id)
-  @meetup.users << current_user
-  flash[:notice] = "Event joined!"
-  redirect "/meetups/#{@meetup_id}"
+  if signed_in?
+    @meetup.users << current_user
+    flash[:notice] = "Meetup joined!"
+    redirect "/meetups/#{@meetup_id}"
+  else
+    flash[:notice] = "You must log in to join a meetup!"
+    redirect "/meetups/#{@meetup_id}"
+  end
 end
 
 post '/leave_meetup/:id' do
@@ -121,5 +126,5 @@ post '/post_comment/:id' do
   @comment_body = params[:body]
   create_comment(@user_id, @meetup_id, @comment_title, @comment_body)
   flash[:notice] = "Comment posted!"
-  redirect "/meetups/#{@meetup_id}"
+  redirect "/meetups/:id"
 end
