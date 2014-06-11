@@ -91,12 +91,8 @@ post "/join_meetup/:id" do
   @user_id = session[:user_id]
   @meetup_id = params[:id]
   @meetup = Meetup.find(@meetup_id)
-  if !@meetup.users.include?(current_user)
-    @join = @meetup.users << current_user
-    flash[:notice] = "Event joined!"
-  else
-    flash[:notice] = "You're already signed up for this meeting!"
-  end
+  @join = @meetup.users << current_user
+  flash[:notice] = "Event joined!"
   redirect "/meetups/#{@meetup_id}"
 end
 
@@ -104,11 +100,8 @@ post '/leave_meetup/:id' do
   @user_id = session[:user_id]
   @meetup_id = params[:id]
   @meetup = Meetup.find(@meetup_id)
-  if @meetup.users.include?(current_user)
-    @meetup.users.delete(current_user)
-    flash[:notice] = "You have left this meetup."
-  else
-    flash[:notice] = "You have not signed up for this meetup yet!"
-  end
+  @meetup.users.include?(current_user)
+  @meetup.users.delete(current_user)
+  flash[:notice] = "You have left this meetup."
   redirect "/meetups/#{@meetup_id}"
 end
