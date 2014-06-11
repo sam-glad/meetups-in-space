@@ -42,3 +42,8 @@ input, textarea {
   padding: 1em;
   background-color: #3B9089;
 }
+
+.user_info {
+  text-align: justify;
+  width: 125px;
+}

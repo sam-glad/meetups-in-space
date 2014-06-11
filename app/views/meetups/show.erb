@@ -5,9 +5,12 @@
 <h3> Attendees </h3>
 
 <% @users.each do |user| %>
-  <%= user.username %>
-  <img src="<%= user.avatar_url%>" alt="<%= user.username %>">
-  <br>
+  <div class="user_info">
+    <img src="<%= user.avatar_url%>" alt="<%= user.username %>" height="125" width="125">
+    <br>
+    <p align="center"><%= user.username %></p>
+    <br>
+  </div>
 <% end %>
 
 <form align="center" action="/join_meetup/<%= @meetup.id %>" method="post">
