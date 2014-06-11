@@ -4,7 +4,6 @@
 
 <p><%= @meetup.description %></p>
 
-
-<form action=<% UserMeetup.new() %>>
-    <input type="submit" value="Join meetup!">
+<form action="/join_meetup/<%= @meetup.id %>" method="post">
+  <input type="submit" value="Join meetup!">
 </form>
