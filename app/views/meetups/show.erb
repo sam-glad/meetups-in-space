@@ -13,6 +13,12 @@
   </div>
 <% end %>
 
-<form align="center" action="/join_meetup/<%= @meetup.id %>" method="post">
-  <input type="submit" value="Join meetup!">
-</form>
+<% if @meetup.users.include?(current_user) %>
+  <form align="center" action="/leave_meetup/<%= @meetup.id %>" method="post">
+  <input type="submit" value="Leave Meetup">
+  </form>
+<% else %>
+  <form align="center" action="/join_meetup/<%= @meetup.id %>" method="post">
+  <input type="submit" value="Join Meetup!">
+  </form>
+<% end %>

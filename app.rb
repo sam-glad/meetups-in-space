@@ -99,3 +99,16 @@ post "/join_meetup/:id" do
   end
   redirect "/meetups/#{@meetup_id}"
 end
+
+post '/leave_meetup/:id' do
+  @user_id = session[:user_id]
+  @meetup_id = params[:id]
+  @meetup = Meetup.find(@meetup_id)
+  if @meetup.users.include?(current_user)
+    @meetup.users.delete(current_user)
+    flash[:notice] = "You have left this meetup."
+  else
+    flash[:notice] = "You have not signed up for this meetup yet!"
+  end
+  redirect "/meetups/#{@meetup_id}"
+end
