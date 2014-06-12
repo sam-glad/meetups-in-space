@@ -72,7 +72,7 @@ end
 get '/meetups/:id' do
   @meetup = Meetup.find(params[:id])
   @users = @meetup.users("username, avatar_url")
-  @comments = Comment.all
+  @comments = Comment.where(meetup_id: params[:id])
   erb :'meetups/show'
 end
 
@@ -126,5 +126,5 @@ post '/post_comment/:id' do
   @comment_body = params[:body]
   create_comment(@user_id, @meetup_id, @comment_title, @comment_body)
   flash[:notice] = "Comment posted!"
-  redirect "/meetups/:id"
+  redirect "/meetups/#{@meetup_id}"
 end
