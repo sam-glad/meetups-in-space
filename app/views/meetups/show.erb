@@ -14,9 +14,10 @@
 <% end %>
 
 <% if @meetup.users.include?(current_user) %>
+  <h2>Post a New Comment:</h2>
   <form action="/post_comment/<%= @meetup.id %>" method="post">
-  <label for="name">Title:</label>
-  <input style="width:250px" type="text" id="title" name="title" required/>
+  <span class="comment_title_span"></span><label for="name">Title:</label>
+  <input style="width:300px" type="text" id="title" name="title" required/>
   <br>
   <label for="body">Comment:</label>
   <input style="height:150px; width:300px" type="text" id="body" name="body" required/>

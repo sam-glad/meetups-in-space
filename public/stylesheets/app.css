@@ -47,3 +47,7 @@ input, textarea {
   text-align: justify;
   width: 125px;
 }
+
+.comment_title_span {
+  padding-left: 40px;
+}
